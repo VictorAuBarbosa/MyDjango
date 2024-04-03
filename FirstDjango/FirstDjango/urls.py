@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, re_path
+from django.urls import include, path, re_path
 from django.contrib import admin
 from mycontacts import views
 
@@ -22,4 +22,8 @@ urlpatterns = [
     re_path(r'^$', views.show),
     re_path(r'^add/', views.add),
     re_path(r'^admin/', admin.site.urls),
+    path('detail/<int:detail_id>/', views.ContactDetailView, name="detail"),
+    path('edit/<int:detail_id>/', views.ContactDetailEdit, name="edit"),
+    path('delete/<int:detail_id>/', views.ContactDelete, name="delete"),
+    path('', views.home, name='home'),
 ]
