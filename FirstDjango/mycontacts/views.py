@@ -6,18 +6,13 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 def ContactDetailEdit(request, detail_id):
-    # Obtém o objeto Contact correspondente ao ID fornecido ou retorna um erro 404 se não for encontrado
     data = get_object_or_404(Contact, pk=detail_id)
     if request.method == 'POST':
-        # Se o formulário for enviado, crie uma instância de AddForm com os dados do formulário
         form = AddForm(request.POST, instance=data)
         if form.is_valid():
-            # Salve os dados do formulário no objeto Contact
             form.save()
-            # Redirecionar para a página de detalhes do contato atualizado
             return HttpResponseRedirect(reverse('detail', args=(detail_id,)))
     else:
-        # Se for uma solicitação GET, crie uma instância de AddForm com os dados do objeto Contact
         form = AddForm(instance=data)
     return render(request, 'edit.html', {'form': form})
 
@@ -40,17 +35,17 @@ def add(request):
         if django_form.is_valid():
            
             """ Assign data in Django Form to local variables """
-            new_member_name = django_form.data.get("name")
-            new_member_relation = django_form.data.get("relation")
-            new_member_phone = django_form.data.get('phone')
-            new_member_email = django_form.data.get('email')
+            new_name = django_form.data.get("name")
+            new_relation = django_form.data.get("relation")
+            new_phone = django_form.data.get('phone')
+            new_email = django_form.data.get('email')
             
             """ This is how your model connects to database and create a new member """
             Contact.objects.create(
-                name =  new_member_name, 
-                relation = new_member_relation,
-                phone = new_member_phone,
-                email = new_member_email, 
+                name =  new_name, 
+                relation = new_relation,
+                phone = new_phone,
+                email = new_email, 
                 )
                  
             contact_list = Contact.objects.all()
@@ -92,17 +87,17 @@ def ContactDetailEdit(request, detail_id):
         if django_form.is_valid():
            
             """ Assign data in Django Form to local variables """
-            edit_member_name = django_form.data.get("name")
-            edit_member_relation = django_form.data.get("relation")
-            edit_member_phone = django_form.data.get('phone')
-            edit_member_email = django_form.data.get('email')
+            edit_name = django_form.data.get("name")
+            edit_relation = django_form.data.get("relation")
+            edit_phone = django_form.data.get('phone')
+            edit_email = django_form.data.get('email')
             
             """ This is how your model connects to database and update a edit member """
            
-            data.name =  edit_member_name
-            data.relation = edit_member_relation
-            data.phone = edit_member_phone
-            data.email = edit_member_email               
+            data.name =  edit_name
+            data.relation = edit_relation
+            data.phone = edit_phone
+            data.email = edit_email               
             data.save()
 
             contact_list = Contact.objects.all()

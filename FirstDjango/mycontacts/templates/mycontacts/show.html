@@ -7,19 +7,19 @@
         
     {% for data in contacts %}
     <li>
-        <a href="{% url 'detail' data.id %}" Name: {{data.name}}</a>
         <div>
             <h2 class="name">{{ data.name }}</h2>
             <div class="relation">{{ data.relation }}</div>
             <div class="phone">{{ data.phone }}</div>
-            <div class="email"><a href='{{ data.email }}'>{{ data.email }}</a> </div>
-            <a href="{% url 'edit' data.id %}"> 
-                <h5 color:brown;>EDIT</h5>
-            </a>
-            <a href="{% url 'delete' data.id %}"> 
-                <h5 color:brown;>DELETE</h5>
-            </a>
-                        
+            <div class="email"><a href='{{ data.email }}'>{{ data.email }}</a></div>
+            <div class="button-container">
+                <a href="{% url 'edit' data.id %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true"> 
+                    <h5>EDIT</h5>
+                </a>
+                <a href="{% url 'delete' data.id %}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true"> 
+                    <h5>DELETE</h5>
+                </a>
+            </div>
         </div>
     </li>
     {%  endfor %}
